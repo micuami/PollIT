@@ -44,6 +44,7 @@ nav{
 #navbar li a.active
 {
     color: #223e91;
+    transition: color 0.3s ease;
 }
 
 #navbar li a:hover::after,
@@ -55,6 +56,7 @@ nav{
     position: absolute;
     bottom: -4px;
     left: 20px;
+    transition: color 0.3s ease;
 }
 
 #mobile {
