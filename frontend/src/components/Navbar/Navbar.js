@@ -1,13 +1,17 @@
 import "./Navbar.css";
 import Logo from "./logoPollit.jpg"
-import {Component} from "react";
+import React from "react";
 
+class Navbar extends React.Component{
+    state = { clicked: false, showLogin: false };
 
-class Navbar extends Component{
-    state={clicked: false};
     handleClick = () => {
-        this.setState({clicked: !this.state.clicked})
-    }
+        this.setState({ clicked: !this.state.clicked });
+    };
+
+    handleLoginClick = () => {
+        this.setState({ showLogin: true });
+    };
     render(){
     return(
         <>
@@ -17,8 +21,8 @@ class Navbar extends Component{
                 </a>
                 <div>
                     <ul id="navbar" className={this.state.clicked ? "#navbar active" : "#navbar"}>
-                        <li><a className="active" href="index.html">Login</a></li>
-                        <li><a href="index.html">Sign Up</a></li>
+                        <li onClick={this.handleLoginClick}>Login</li>
+                        <li>Sign Up</li>
                     </ul>
                 </div>
                 <div id="mobile" onClick={this.handleClick}>
