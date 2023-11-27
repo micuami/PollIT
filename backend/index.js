@@ -1,8 +1,9 @@
 const express= require('express');
 const mongoose = require('mongoose');
 const app = express();
+require('dotenv').config()
 
-mongoose.connect('mongodb://127.0.0.1:27017/probaIT');
+mongoose.connect(process.env.MONGO_URI);
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Error connecting to MongoDB:'));
