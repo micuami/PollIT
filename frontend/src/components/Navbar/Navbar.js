@@ -1,17 +1,41 @@
-import "./Navbar.css";
 import Logo from "./logoPollit.jpg"
-import React from "react";
+import React, { Component } from 'react';
+import Register from './Register/Register';
+import Login from './Login/Login';
+import "./Navbar.css";
 
-class Navbar extends React.Component{
+class Navbar extends Component{
     state = { clicked: false, showLogin: false };
 
     handleClick = () => {
         this.setState({ clicked: !this.state.clicked });
     };
 
-    handleLoginClick = () => {
-        this.setState({ showLogin: true });
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            loginModalShow: false,
+            registerModalShow: false
+        };
+    }
+
+    handleLoginModalShow = () => {
+        this.setState({ loginModalShow: true });
     };
+
+    handleLoginModalClose = () => {
+        this.setState({ loginModalShow: false });
+    };
+
+    handleRegisterModalShow = () => {
+        this.setState({ registerModalShow: true });
+    };
+
+    handleRegisterModalClose = () => {
+        this.setState({ registerModalShow: false });
+    };
+
     render(){
     return(
         <>
@@ -21,14 +45,16 @@ class Navbar extends React.Component{
                 </a>
                 <div>
                     <ul id="navbar" className={this.state.clicked ? "#navbar active" : "#navbar"}>
-                        <li onClick={this.handleLoginClick}>Login</li>
-                        <li>Sign Up</li>
+                    <li onClick={this.handleLoginModalShow}>Login</li>
+                    <li onClick={this.handleRegisterModalShow}>Register</li>
                     </ul>
                 </div>
                 <div id="mobile" onClick={this.handleClick}>
                     <i id="bar" className={this.state.clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
                 </div>
             </nav>
+            <Login show={this.state.loginModalShow} handleClose={this.handleLoginModalClose} />
+            <Register show={this.state.registerModalShow} handleClose={this.handleRegisterModalClose} />
         </>
     )
 }
