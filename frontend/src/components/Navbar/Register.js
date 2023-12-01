@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import './Register.css';
+
 
 const Register = ({ show, handleClose }) => {
   const [email, setEmail] = useState('');

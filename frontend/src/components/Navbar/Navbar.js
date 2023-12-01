@@ -1,7 +1,7 @@
 import Logo from "./logoPollit.jpg"
 import React, { Component } from 'react';
-import Register from './Register/Register';
-import Login from './Login/Login';
+import Register from './Register';
+import Login from './Login';
 import "./Navbar.css";
 
 class Navbar extends Component{

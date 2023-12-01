@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import CloseButton from 'react-bootstrap/CloseButton';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
-import './Login.css';
 
 const Login = ({ show, handleClose }) => {
   const [email, setEmail] = useState('');
