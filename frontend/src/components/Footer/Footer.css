@@ -1,5 +1,5 @@
   .footer {
-    background-color: #ff66b2; 
+    background-color: #FF1F66; 
     padding: 10px;
     text-align: center;
     width: 100%;
@@ -9,25 +9,25 @@
   
   .social-icons {
     display: flex;
-    background-color: #ff66b2; 
+    background-color: #FF1F66; 
     justify-content: center;
     align-items: center;
     margin-top: 10px; 
   }
   
   .social-icons a {
-    background-color: #ff66b2; 
+    background-color: #FF1F66; 
     color: #fff;
     margin: 0 20px; 
     text-decoration: none;
   }
   
   .social-icons i {
-    background-color: #ff66b2; 
+    background-color: #FF1F66; 
     font-size: 32px;
   }
   
   .social-icons a:hover i {
-    color: #d10076;
+    color: #04395E;
     transition: color 0.3s ease;
   }
