@@ -3,10 +3,10 @@ const express = require("express")
 const morgan = require("morgan") 
 const {log} = require("mercedlogger") 
 const cors = require("cors") 
-const UserRouter = require("./controllers/User") 
+const UserRouter = require("./controllers/userController") 
 
 
-const {PORT = 3000} = process.env
+const PORT = 5000;
 const app = express()
 
 

@@ -18,7 +18,7 @@ const isLoggedIn = async (req, res, next) => {
           res.status(400).json({ error: "token verification failed" });
         }
       } else {
-        res.status(400).json({ error: "malformed auth header" });
+        res.status(400).json({ error: "Malformed auth header" });
       }
     } else {
       res.status(400).json({ error: "No authorization header" });
