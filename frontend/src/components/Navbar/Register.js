@@ -10,59 +10,82 @@ const Register = ({ show, handleClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSaveChanges = () => {
-    //add logic for handling form data
-    console.log('Email:', email);
-    console.log('Password:', password);
-    handleClose();
+  const handleSaveChanges = async () => {
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:5000/register', {
+        method: 'POST',
+        body: JSON.stringify({ email, password }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
+
+      const result = await response.json();
+      console.warn(result);
+      handleClose();
+    } catch (error) {
+      console.error('Error during registration:', error);
+      setError('Registration failed. Please try again.');
+    }
   };
 
   return (
     <Modal 
-        size="sm"
-        show={show} 
-        onHide={handleClose}>
-      <Modal.Header className="custom-form-header">
-          <CloseButton onClick={handleClose} className="custom-close-btn" />
-      </Modal.Header>
-      <Modal.Body className="custom-form-body">
-      <Modal.Title className="custom-modal-title">Register</Modal.Title>
-        <Form>
-          <Form.Group className="mb-3">
-            <Form.Control
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="custom-form-control"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Control
-              type="text"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="custom-form-control"
-            />
-          </Form.Group>
-          <Form.Group className="mb-3">
-            <Form.Control
-              type="text"
-              placeholder="Confirm password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className="custom-form-control"
-            />
-          </Form.Group>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer className="custom-modal-footer">
-        <Button variant="light" onClick={handleSaveChanges} className="custom-modal-btn">
-          Create account
-        </Button>
-      </Modal.Footer>
+          size="sm"
+          show={show} 
+          onHide={handleClose}>
+        <Modal.Header className="custom-form-header">
+            <CloseButton onClick={handleClose} className="custom-close-btn" />
+        </Modal.Header>
+        <Modal.Body className="custom-form-body">
+        <Modal.Title className="custom-modal-title">Register</Modal.Title>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="custom-form-control"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="custom-form-control"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Control
+                type="text"
+                placeholder="Confirm password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="custom-form-control"
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer className="custom-modal-footer">
+          <Button variant="light" onClick={handleSaveChanges} className="custom-modal-btn">
+            Create account
+          </Button>
+          {error && <p className="text-danger">{error}</p>}
+        </Modal.Footer>
     </Modal>
   );
 };

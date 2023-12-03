@@ -1,19 +1,14 @@
-const express= require('express');
-const mongoose = require('mongoose');
+const express = require('express');
+require('./db/config');
+const User = require("./db/User");
+const cors = require('cors');
 const app = express();
-require('dotenv').config()
-
-mongoose.connect(process.env.MONGO_URI);
-const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'Error connecting to MongoDB:'));
-db.once('open', () => console.log('Connected to MongoDB'));
-const MyModel = mongoose.model('Test', new mongoose.Schema({ name: String }));
-const test = new MyModel({name: "name"});
-test.save();
-
-app.get("/", (req, resp)=>{
-    resp.send("app is working...");
-});
+app.use(express.json());
+app.use(cors());
+app.post("/register", async(req, resp)=>{
+    let user = new User(req.body);
+    let result = await user.save();
+    resp.send(result);
+})
 
 app.listen(5000);
