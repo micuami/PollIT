@@ -39,6 +39,7 @@ const Register = ({ show, handleClose }) => {
       setError('Registration failed. Please try again.');
     }
   };
+  
 
   return (
     <Modal 

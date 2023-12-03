@@ -59,3 +59,8 @@ code {
   opacity: 100%;
   color: #04395E;
 }
+
+.text-danger{
+  display: block;
+  margin: auto;
+}
