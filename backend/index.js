@@ -1,14 +1,24 @@
-const express = require('express');
-require('./db/config');
-const User = require("./db/User");
-const cors = require('cors');
-const app = express();
-app.use(express.json());
-app.use(cors());
-app.post("/register", async(req, resp)=>{
-    let user = new User(req.body);
-    let result = await user.save();
-    resp.send(result);
-})
+require("dotenv").config() 
+const express = require("express") 
+const morgan = require("morgan") 
+const {log} = require("mercedlogger") 
+const cors = require("cors") 
+const UserRouter = require("./controllers/User") 
 
-app.listen(5000);
+
+const {PORT = 3000} = process.env
+const app = express()
+
+
+app.use(cors()) 
+app.use(morgan("tiny")) 
+app.use(express.json()) 
+
+
+
+app.get("/", (req, res) => {
+    res.send("this is the test route to make sure server is working")
+})
+app.use("/users", UserRouter) 
+
+app.listen(PORT, () => log.green("SERVER STATUS", `Listening on port ${PORT}`))

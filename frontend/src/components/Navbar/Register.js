@@ -21,7 +21,7 @@ const Register = ({ show, handleClose }) => {
     try {
       const response = await fetch('http://localhost:5000/register', {
         method: 'POST',
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({email: email, password: password}),
         headers: {
           'Content-Type': 'application/json',
         },
