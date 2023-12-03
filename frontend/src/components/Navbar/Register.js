@@ -21,19 +21,27 @@ const Register = ({ show, handleClose }) => {
     try {
       const response = await fetch('http://localhost:5000/users/register', {
         method: 'POST',
-        body: JSON.stringify({email: email, password: password}),
+        body: JSON.stringify({ email: email, password: password }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
+  
       if (!response.ok) {
-        throw new Error('Registration failed');
+        const result = await response.json();
+        if (response.status === 400 && result.error === "User already exists with this email.") {
+          setError('User already exists');
+        } else {
+          throw new Error('Registration failed');
+        }
+      } else {
+        const result = await response.json();
+        console.warn(result);
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        handleClose();
       }
-
-      const result = await response.json();
-      console.warn(result);
-      handleClose();
     } catch (error) {
       console.error('Error during registration:', error);
       setError('Registration failed. Please try again.');

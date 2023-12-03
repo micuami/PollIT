@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal';
 const Login = ({ show, handleClose }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSaveChanges = async () => {
     try {
@@ -21,15 +22,20 @@ const Login = ({ show, handleClose }) => {
       if (response.ok) {
         const { token } = await response.json();
         console.log('Login successful. Token:', token);
+        setEmail('');
+        setPassword('');
         handleClose();
       } else {
         const { error } = await response.json();
         console.error('Login failed:', error);
+        setError(error); // Set the error state with the received error message
       }
     } catch (error) {
       console.error('Error during login:', error);
+      setError('An unexpected error occurred.'); // Set a default error message for unexpected errors
     }
   };
+
 
   return (
     <Modal size="sm" show={show} onHide={handleClose}>
@@ -63,6 +69,7 @@ const Login = ({ show, handleClose }) => {
         <Button variant="light" onClick={handleSaveChanges} className="custom-modal-btn">
           Login
         </Button>
+        {error && <p className="text-danger">{error}</p>}
       </Modal.Footer>
     </Modal>
   );
