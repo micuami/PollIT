@@ -71,7 +71,7 @@ const Register = ({ show, handleClose }) => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Control
-                type="text"
+                type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -80,7 +80,7 @@ const Register = ({ show, handleClose }) => {
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Control
-                type="text"
+                type="password"
                 placeholder="Confirm password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}

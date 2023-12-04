@@ -2,6 +2,7 @@ import Logo from "./logoPollit.jpg"
 import React, { Component } from 'react';
 import Register from './Register';
 import Login from './Login';
+import CreatePoll from './CreatePoll';
 import "./Navbar.css";
 
 class Navbar extends Component{
@@ -16,6 +17,7 @@ class Navbar extends Component{
             clicked: false,
             loginModalShow: false,
             registerModalShow: false,
+            createPollModalShow: false,
             isLoggedIn: false
         };
     }
@@ -36,6 +38,14 @@ class Navbar extends Component{
         this.setState({ registerModalShow: false });
     };
 
+    handleCreatePollModalShow = () => {
+      this.setState({ createPollModalShow: true });
+    };
+
+    handleCreatePollModalClose = () => {
+      this.setState({ createPollModalShow: false });
+    };
+
     handleLogout = () => {
         this.setState({ isLoggedIn: false });
     };
@@ -45,7 +55,7 @@ class Navbar extends Component{
     };
 
     render() {
-        const { clicked, loginModalShow, registerModalShow, isLoggedIn } = this.state;
+        const { clicked, loginModalShow, registerModalShow, createPollModalShow, isLoggedIn } = this.state;
     
         return (
           <>
@@ -56,7 +66,7 @@ class Navbar extends Component{
               <div>
                 {isLoggedIn ? (
                   <ul id="navbar" className={clicked ? "#navbar active" : "#navbar"}>
-                    <li>Create Poll</li>
+                    <li onClick={this.handleCreatePollModalShow}>Create Poll</li>
                     <li onClick={this.handleLogout}>Log out</li>
                   </ul>
                 ) : (
@@ -73,9 +83,10 @@ class Navbar extends Component{
             <Login
               show={loginModalShow}
               handleClose={this.handleLoginModalClose}
-              onLoginSuccess={this.handleLoginSuccess} // Pass the function to Login
+              onLoginSuccess={this.handleLoginSuccess} 
             />
             <Register show={registerModalShow} handleClose={this.handleRegisterModalClose} />
+            <CreatePoll show={createPollModalShow} handleClose={this.handleCreatePollModalClose} />
           </>
         );
       }

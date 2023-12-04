@@ -24,6 +24,27 @@ code {
   align-items: center;
 }
 
+
+.mb-3 .custom-form-label {
+  color: white;
+}
+
+.custom-form-body .poll-type-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px; 
+}
+
+.custom-form-control-radio {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.custom-form-control-radio input {
+  margin-right: 5px; /* Adjust the spacing between the radio button and label */
+}
+
 .custom-modal-title {
   color: white; 
   font-size: 25px; 
