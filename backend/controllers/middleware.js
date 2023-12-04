@@ -1,7 +1,6 @@
 require("dotenv").config(); 
 const jwt = require("jsonwebtoken");
 
-
 const isLoggedIn = async (req, res, next) => {
   try {
 

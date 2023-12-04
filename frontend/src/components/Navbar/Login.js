@@ -4,7 +4,7 @@ import CloseButton from 'react-bootstrap/CloseButton';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-const Login = ({ show, handleClose }) => {
+const Login = ({ show, handleClose, onLoginSuccess }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -24,15 +24,16 @@ const Login = ({ show, handleClose }) => {
         console.log('Login successful. Token:', token);
         setEmail('');
         setPassword('');
+        onLoginSuccess();
         handleClose();
       } else {
         const { error } = await response.json();
         console.error('Login failed:', error);
-        setError(error); // Set the error state with the received error message
+        setError(error); 
       }
     } catch (error) {
       console.error('Error during login:', error);
-      setError('An unexpected error occurred.'); // Set a default error message for unexpected errors
+      setError('An unexpected error occurred.');
     }
   };
 
