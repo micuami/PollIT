@@ -24,13 +24,9 @@ code {
   align-items: center;
 }
 
-
-.mb-3 .custom-form-label {
-  color: white;
-}
-
 .custom-form-body .poll-type-grid {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px; 
 }
@@ -42,7 +38,8 @@ code {
 }
 
 .custom-form-control-radio input {
-  margin-right: 5px; /* Adjust the spacing between the radio button and label */
+  margin-right: 5px; 
+  margin-bottom: 10px;
 }
 
 .custom-modal-title {
@@ -84,4 +81,14 @@ code {
 .text-danger{
   display: block;
   margin: auto;
+}
+
+.custom-form-label1 {
+  color: white;
+  margin-left: -84%;
+}
+
+.custom-form-label2 {
+  color: white;
+  margin-left: -79%;
 }

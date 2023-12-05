@@ -7,7 +7,7 @@ import CloseButton from 'react-bootstrap/CloseButton';
 const CreatePoll = ({ show, handleClose }) => {
   const [question, setQuestion] = useState('');
   const [pollType, setPollType] = useState('single'); // 'single' or 'multiple'
-  const [options, setOptions] = useState(['']);
+  const [options, setOptions] = useState(['','','']);
   const [error, setError] = useState('');
 
   const handleAddOption = () => {
@@ -36,7 +36,7 @@ const CreatePoll = ({ show, handleClose }) => {
     // Reset state and close modal
     setQuestion('');
     setPollType('single');
-    setOptions(['']);
+    setOptions(['','','']);
     setError('');
     handleClose();
   };
@@ -59,7 +59,7 @@ const CreatePoll = ({ show, handleClose }) => {
             />
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label className="custom-form-label">Poll Type:</Form.Label>
+            <Form.Label className="custom-form-label1">Poll Type:</Form.Label>
             <div className="poll-type-grid">
               <Form.Check
                 type="radio"
@@ -82,7 +82,7 @@ const CreatePoll = ({ show, handleClose }) => {
             </div>
           </Form.Group>
           <Form.Group className="mb-3">
-            <Form.Label className="custom-form-label">Poll Options:</Form.Label>
+            <Form.Label className="custom-form-label2">Poll Options:</Form.Label>
             {options.map((option, index) => (
               <Form.Control
                 key={index}
@@ -93,7 +93,7 @@ const CreatePoll = ({ show, handleClose }) => {
                 className="custom-form-control"
               />
             ))}
-            <Button variant="light" onClick={handleAddOption} className="custom-add-option-btn">
+            <Button variant="light" onClick={handleAddOption} className="custom-modal-btn">
               + Add Option
             </Button>
           </Form.Group>
