@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import CloseButton from 'react-bootstrap/CloseButton';
 
-const CreatePoll = ({ show, handleClose }) => {
+const CreatePoll = ({ show, handleClose, userEmail }) => {
   const [question, setQuestion] = useState('');
-  const [pollType, setPollType] = useState('single'); // 'single' or 'multiple'
+  const [pollType, setPollType] = useState('single'); 
   const [options, setOptions] = useState(['','','']);
   const [error, setError] = useState('');
 
@@ -20,25 +21,32 @@ const CreatePoll = ({ show, handleClose }) => {
     setOptions(newOptions);
   };
 
-  const handleSaveChanges = () => {
+  const handleSaveChanges = async () => {
     if (!question.trim()) {
       setError('Please enter a poll question.');
       return;
     }
 
-    // Add your additional validation logic here if needed
-
-    // Add your logic to handle saving the poll
-    console.log('Poll Question:', question);
-    console.log('Poll Type:', pollType);
-    console.log('Poll Options:', options);
-
-    // Reset state and close modal
-    setQuestion('');
-    setPollType('single');
-    setOptions(['','','']);
-    setError('');
-    handleClose();
+    try {
+      const response = await axios.post('http://localhost:5000/polls', {
+        email: 'userEmail', 
+        question,
+        pollType,
+        options,
+        votes: [], 
+      });
+  
+      console.log('Poll created successfully:', response.data);
+  
+      setQuestion('');
+      setPollType('single');
+      setOptions(['', '', '']);
+      setError('');
+      handleClose();
+    } catch (error) {
+      console.error('Error creating poll:', error.message);
+      setError('Error creating poll. Please try again.');
+    }
   };
 
   return (

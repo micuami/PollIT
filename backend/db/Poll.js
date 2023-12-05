@@ -5,7 +5,7 @@ const PollSchema = new Schema({
     question: { type: String, required: true },
     pollType: { type: String, required: true },
     options: [{ type: String, required: true }],
-    votes: [{ user: { type: String, required: true }, optionIndex: { type: Number, required: true } }]
+    votes: [{ type: Int16Array, requiered: false }]
 });
 
 const Poll = model("Poll", PollSchema);

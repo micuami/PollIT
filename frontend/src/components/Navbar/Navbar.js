@@ -50,8 +50,8 @@ class Navbar extends Component{
         this.setState({ isLoggedIn: false });
     };
 
-    handleLoginSuccess = () => {
-        this.setState({ isLoggedIn: true });
+    handleLoginSuccess = (userEmail) => {
+      this.setState({ isLoggedIn: true, userEmail });
     };
 
     render() {
@@ -86,7 +86,7 @@ class Navbar extends Component{
               onLoginSuccess={this.handleLoginSuccess} 
             />
             <Register show={registerModalShow} handleClose={this.handleRegisterModalClose} />
-            <CreatePoll show={createPollModalShow} handleClose={this.handleCreatePollModalClose} />
+            <CreatePoll show={createPollModalShow} handleClose={this.handleCreatePollModalClose} userEmail={this.state.userEmail} />
           </>
         );
       }

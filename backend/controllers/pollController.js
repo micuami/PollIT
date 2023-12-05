@@ -26,14 +26,16 @@ router.get("/:id", isLoggedIn, async (req, res) => {
 
 
 router.post("/", isLoggedIn, async (req, res) => {
-  const { email } = req.user; 
-  req.body.email = email; 
+  const { email } = req.user;
+  req.body.email = email;
 
-  res.json(
-    await Poll.create(req.body).catch((error) =>
-      res.status(400).json({ error })
-    )
-  );
+  try {
+    const createdPoll = await Poll.create(req.body);
+    res.status(201).json(createdPoll);
+  } catch (error) {
+    console.error('Error creating poll:', error.message);
+    res.status(400).json({ error: 'Error creating poll. Please try again.' });
+  }
 });
 
 

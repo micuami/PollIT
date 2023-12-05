@@ -18,10 +18,12 @@ const Login = ({ show, handleClose, onLoginSuccess }) => {
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       if (response.ok) {
-        const { token } = await response.json();
+        const { token, email: userLoggedInEmail } = await response.json(); // extrage emailul
         console.log('Login successful. Token:', token);
+        console.log('User email:', userLoggedInEmail); 
+  
         setEmail('');
         setPassword('');
         onLoginSuccess();
@@ -29,7 +31,7 @@ const Login = ({ show, handleClose, onLoginSuccess }) => {
       } else {
         const { error } = await response.json();
         console.error('Login failed:', error);
-        setError(error); 
+        setError(error);
       }
     } catch (error) {
       console.error('Error during login:', error);

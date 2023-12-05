@@ -4,6 +4,7 @@ const morgan = require("morgan")
 const {log} = require("mercedlogger") 
 const cors = require("cors") 
 const UserRouter = require("./controllers/userController") 
+const PollRouter = require("./controllers/pollController") 
 
 
 const PORT = 5000;
@@ -20,6 +21,6 @@ app.get("/", (req, res) => {
     res.send("this is the test route to make sure server is working")
 })
 app.use("/users", UserRouter) 
-//app.use("/polls", PollRouter)
+app.use("/polls", PollRouter)
 
 app.listen(PORT, () => log.green("SERVER STATUS", `Listening on port ${PORT}`))

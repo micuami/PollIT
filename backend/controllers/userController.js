@@ -28,14 +28,13 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-
     const user = await User.findOne({ email: req.body.email });
-    if (user) {
 
+    if (user) {
       const result = await bcrypt.compare(req.body.password, user.password);
       if (result) {
-        const token = await jwt.sign({ email: user.email }, "SECRET");
-        res.json({ token });
+        const token = jwt.sign({ email: user.email }, "SECRET");
+        res.json({ token, email: user.email }); // returneaza emailul si tokenul
       } else {
         res.status(400).json({ error: "Password do not match." });
       }
@@ -46,5 +45,4 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ error });
   }
 });
-
 module.exports = router
