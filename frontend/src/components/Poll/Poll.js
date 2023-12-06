@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import './Poll.css';
 
 const Poll = () => {
@@ -9,7 +10,6 @@ const Poll = () => {
   const fetchPolls = async () => {
     try {
       const authToken = 'Bearer ' + localStorage.getItem('authToken');
-
       const response = await fetch('http://localhost:5000/polls/polls', {
         method: 'GET',
         headers: {
@@ -17,6 +17,7 @@ const Poll = () => {
           'Content-Type': 'application/json'
         },
       });
+
       if (response.ok) {
         const data = await response.json();
         const initialSelectedOptions = {};
@@ -44,6 +45,29 @@ const Poll = () => {
     });
   };
 
+  const handleVote = async (pollId) => {
+    const authToken = 'Bearer ' + localStorage.getItem('authToken');
+
+    try {
+      const response = await fetch(`http://localhost:5000/polls/${pollId}/vote`, {
+        method: 'POST',
+        headers: {
+          Authorization: authToken,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ selectedOption: selectedOptions[pollId] }),
+      });
+
+      if (response.ok) {
+        fetchPolls();
+      } else {
+        console.error('Failed to vote on the poll');
+      }
+    } catch (error) {
+      console.error('Error voting on the poll:', error);
+    }
+  };
+
   return (
     <div className="container">
       {polls.map((poll) => (
@@ -60,6 +84,7 @@ const Poll = () => {
               className="custom-form-control-options"
             />
           ))}
+          <Button className="custom-modal-btn-vote" onClick={() => handleVote(poll._id)}>Vote</Button>
         </ul>
       ))}
     </div>
