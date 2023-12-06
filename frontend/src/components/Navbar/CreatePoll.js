@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -28,26 +27,18 @@ const CreatePoll = ({ show, handleClose, userEmail }) => {
     }
 
     try {
-      // Fetch authentication token from wherever you store it (state, context, etc.)
-      const authToken = 'Bearer ' + localStorage.getItem('authToken');  // Assuming you store the token in localStorage
+    
+      const authToken = 'Bearer ' + localStorage.getItem('authToken');  
 
-      const response = await axios.post(
-        'http://localhost:5000/probaIT/polls',
-        {
-          email: userEmail,
-          question,
-          pollType,
-          options,
-          votes: [],
+      const response = await fetch('http://localhost:5000/polls', {
+        method: 'POST',
+        body: JSON.stringify({ email: userEmail, question: question, pollType: pollType, options: options }),
+        headers: {
+          Authorization: authToken,
+          'Content-Type': 'application/json'
         },
-        {
-          headers: {
-            Authorization: authToken,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
-  
+      });
+      
       console.log('Poll created successfully:', response.data);
   
       setQuestion('');
