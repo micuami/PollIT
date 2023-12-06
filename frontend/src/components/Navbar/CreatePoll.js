@@ -30,7 +30,7 @@ const CreatePoll = ({ show, handleClose, userEmail }) => {
     
       const authToken = 'Bearer ' + localStorage.getItem('authToken');  
 
-      const response = await fetch('http://localhost:5000/polls', {
+      const response = await fetch('http://localhost:5000/polls/create', {
         method: 'POST',
         body: JSON.stringify({ email: userEmail, question: question, pollType: pollType, options: options }),
         headers: {
