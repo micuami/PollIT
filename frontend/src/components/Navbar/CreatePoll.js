@@ -39,7 +39,7 @@ const CreatePoll = ({ show, handleClose, userEmail }) => {
         },
       });
       
-      console.log('Poll created successfully:', response.data);
+      console.log('Poll created successfully:', response);
   
       setQuestion('');
       setPollType('single');

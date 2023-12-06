@@ -21,6 +21,7 @@ const Login = ({ show, handleClose, onLoginSuccess }) => {
   
       if (response.ok) {
         const { token, email: userLoggedInEmail } = await response.json(); // extrage emailul
+        localStorage.setItem("authToken", token);
         console.log('Login successful. Token:', token);
         console.log('User email:', userLoggedInEmail); 
   

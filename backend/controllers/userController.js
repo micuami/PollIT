@@ -33,7 +33,7 @@ router.post("/login", async (req, res) => {
     if (user) {
       const result = await bcrypt.compare(req.body.password, user.password);
       if (result) {
-        const token = jwt.sign({ email: user.email }, "SECRET");
+        const token = jwt.sign({ email: user.email }, process.env.SECRET);
         res.json({ token, email: user.email }); // returneaza emailul si tokenul
       } else {
         res.status(400).json({ error: "Password do not match." });

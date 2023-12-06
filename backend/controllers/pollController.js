@@ -4,7 +4,7 @@ const { isLoggedIn } = require("./middleware");
 
 const router = Router();
 
-router.get("/", isLoggedIn, async (req, res) => {
+router.get("/polls", isLoggedIn, async (req, res) => {
   const { email } = req.user; 
   res.json(
     await Poll.find({ email }).catch((error) =>

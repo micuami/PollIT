@@ -6,7 +6,16 @@ const Poll = () => {
 
   const fetchPolls = async () => {
     try {
-      const response = await fetch('http://localhost:5000/polls');
+
+      const authToken = 'Bearer ' + localStorage.getItem('authToken');
+
+      const response = await fetch('http://localhost:5000/polls/polls', {
+        method: 'GET',
+        headers: {
+          Authorization: authToken,
+          'Content-Type': 'application/json'
+        },
+      });
       if (response.ok) {
         const data = await response.json();
         setPolls(data);
@@ -24,11 +33,11 @@ const Poll = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <ul>
         {polls.map((poll) => (
           <li key={poll._id}>
-            {poll.question} - Created by: {poll.createdBy}
+            {poll.question} - Created by: {poll.email}
           </li>
         ))}
       </ul>
