@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import Form from 'react-bootstrap/Form';
 import './Poll.css';
 
 const Poll = () => {
   const [polls, setPolls] = useState([]);
+  const [selectedOptions, setSelectedOptions] = useState({});
 
   const fetchPolls = async () => {
     try {
-
       const authToken = 'Bearer ' + localStorage.getItem('authToken');
 
       const response = await fetch('http://localhost:5000/polls/polls', {
@@ -18,6 +19,11 @@ const Poll = () => {
       });
       if (response.ok) {
         const data = await response.json();
+        const initialSelectedOptions = {};
+        data.forEach((poll) => {
+          initialSelectedOptions[poll._id] = '';
+        });
+        setSelectedOptions(initialSelectedOptions);
         setPolls(data);
       } else {
         console.error('Failed to fetch polls');
@@ -27,20 +33,35 @@ const Poll = () => {
     }
   };
 
-
   useEffect(() => {
     fetchPolls();
   }, []);
 
+  const handleOptionChange = (pollId, optionIndex) => {
+    setSelectedOptions({
+      ...selectedOptions,
+      [pollId]: polls.find((poll) => poll._id === pollId).options[optionIndex],
+    });
+  };
+
   return (
     <div className="container">
-      <ul>
-        {polls.map((poll) => (
-          <li key={poll._id}>
-            {poll.question} - Created by: {poll.email}
-          </li>
-        ))}
-      </ul>
+      {polls.map((poll) => (
+        <ul key={poll._id}>
+          <li>{poll.question}</li>
+          {poll.options.map((option, index) => (
+            <Form.Check
+              key={index}
+              type="radio"
+              label={option}
+              name={`optionVote_${poll._id}`}
+              checked={selectedOptions[poll._id] === option}
+              onChange={() => handleOptionChange(poll._id, index)}
+              className="custom-form-control-options"
+            />
+          ))}
+        </ul>
+      ))}
     </div>
   );
 };

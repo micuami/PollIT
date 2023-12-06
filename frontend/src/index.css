@@ -56,6 +56,15 @@ code {
   margin-bottom: 5px;
 }
 
+custom-form-control-options {
+  border: 2px solid white; 
+  background-color: white;
+  color:#04395E;
+  border-radius: 8px; 
+  padding: 10px; 
+  margin-bottom: 5px;
+}
+
 .custom-form-control::placeholder {
   color: white; 
 }
