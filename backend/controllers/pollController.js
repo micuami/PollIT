@@ -4,7 +4,7 @@ const { isLoggedIn } = require("./middleware");
 
 const router = Router();
 
-router.get("/", isLoggedIn, async (req, res) => {
+router.get("/polls", isLoggedIn, async (req, res) => {
   const { email } = req.user; 
   res.json(
     await Poll.find({ email }).catch((error) =>
@@ -14,7 +14,7 @@ router.get("/", isLoggedIn, async (req, res) => {
 });
 
 
-router.get("/:id", isLoggedIn, async (req, res) => {
+router.get("/polls:id", isLoggedIn, async (req, res) => {
   const { email } = req.user; 
   const _id = req.params.id; 
   res.json(
@@ -25,7 +25,7 @@ router.get("/:id", isLoggedIn, async (req, res) => {
 });
 
 
-router.post("/", isLoggedIn, async (req, res) => {
+router.post("/polls", isLoggedIn, async (req, res) => {
   const { email } = req.user;
   req.body.email = email;
 
@@ -39,7 +39,7 @@ router.post("/", isLoggedIn, async (req, res) => {
 });
 
 
-router.put("/:id", isLoggedIn, async (req, res) => {
+router.put("/polls:id", isLoggedIn, async (req, res) => {
   const { email } = req.user; 
   req.body.email = email; 
   const _id = req.params.id;
@@ -52,7 +52,7 @@ router.put("/:id", isLoggedIn, async (req, res) => {
 });
 
 
-router.delete("/:id", isLoggedIn, async (req, res) => {
+router.delete("/polls:id", isLoggedIn, async (req, res) => {
   const { email } = req.user; 
   const _id = req.params.id;
 

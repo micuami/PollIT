@@ -28,13 +28,25 @@ const CreatePoll = ({ show, handleClose, userEmail }) => {
     }
 
     try {
-      const response = await axios.post('http://localhost:5000/polls', {
-        email: 'userEmail', 
-        question,
-        pollType,
-        options,
-        votes: [], 
-      });
+      // Fetch authentication token from wherever you store it (state, context, etc.)
+      const authToken = 'Bearer ' + localStorage.getItem('authToken');  // Assuming you store the token in localStorage
+
+      const response = await axios.post(
+        'http://localhost:5000/probaIT/polls',
+        {
+          email: userEmail,
+          question,
+          pollType,
+          options,
+          votes: [],
+        },
+        {
+          headers: {
+            Authorization: authToken,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
   
       console.log('Poll created successfully:', response.data);
   
