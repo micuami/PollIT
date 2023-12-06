@@ -75,12 +75,6 @@ custom-form-control-options {
   margin: auto;
 }
 
-custom-modal-btn-vote {
-  color: white; 
-  display: block;
-  margin: auto;
-}
-
 .custom-modal-footer {
   border-top:  #04395E;
   background-color: #04395E;
@@ -106,4 +100,33 @@ custom-modal-btn-vote {
 .custom-form-label2 {
   color: white;
   margin-left: -79%;
+}
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 43%;
+  margin: 25px;
+  padding: 20px;
+  background-color: #fff;
+  color: #183281;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container ul {
+  list-style-type: none;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.container .custom-modal-btn-vote {
+  color: white; 
+  display: block;
+  margin-top: 10px;
+  background-color: #04395E;
+  border-color: #04395E;
 }

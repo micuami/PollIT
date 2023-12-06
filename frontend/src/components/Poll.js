@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import './Poll.css';
 
 const Poll = () => {
   const [polls, setPolls] = useState([]);
@@ -69,24 +68,28 @@ const Poll = () => {
   };
 
   return (
-    <div className="container">
-      {polls.map((poll) => (
-        <ul key={poll._id}>
-          <li>{poll.question}</li>
-          {poll.options.map((option, index) => (
-            <Form.Check
-              key={index}
-              type="radio"
-              label={option}
-              name={`optionVote_${poll._id}`}
-              checked={selectedOptions[poll._id] === option}
-              onChange={() => handleOptionChange(poll._id, index)}
-              className="custom-form-control-options"
-            />
-          ))}
-          <Button className="custom-modal-btn-vote" onClick={() => handleVote(poll._id)}>Vote</Button>
-        </ul>
-      ))}
+    <div>
+        {polls.map((poll) => (
+          <div className="wrapper">
+              <div className="container">
+                  <ul key={poll._id}>
+                    <li>{poll.question}</li>
+                    {poll.options.map((option, index) => (
+                      <Form.Check
+                        key={index}
+                        type="radio"
+                        label={option}
+                        name={`optionVote_${poll._id}`}
+                        checked={selectedOptions[poll._id] === option}
+                        onChange={() => handleOptionChange(poll._id, index)}
+                        className="custom-form-control-options"
+                      />
+                    ))}
+                    <Button className="custom-modal-btn-vote" onClick={() => handleVote(poll._id)}>Vote</Button>
+                  </ul>
+              </div>
+          </div>
+        ))}
     </div>
   );
 };
