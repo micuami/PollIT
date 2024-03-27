@@ -1,5 +1,5 @@
 ﻿# PollIT
-1.Care a fost scopul proiectului? 
+1. Care a fost scopul proiectului? 
 
 Scopul este dat de proba practica a departamentului de IT din Liga Studentilor de la Automatica.
 
