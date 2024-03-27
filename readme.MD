@@ -15,5 +15,5 @@ Partea de frontend necesita modificari pentru a coincide design-ului impus, iar 
 5. De ce resurse m-am folosit?
 M-am folosit de diverse site-uri web si clipuri video de pe YouTube destinate acestui domeniu, dar am utilizat si instrumente de inteligenta artificiala, in mare parte pentru a intelege cum se realizeaza legarea frontend-ului de backend. Am incercat sa il folosesc si pentru a realiza partea de css, dar nu a avut succes.
 
-6.Experienta personala in perioada de mentorat
+6. Experienta personala in perioada de mentorat
 Am invatat in aceste 3 saptamani mai mult decat am invatat vreodata in atat de putin timp si mai mult decat ma credeam in stare sa invat, simt cumva ca mi-am depasit limitele. Mi se pare extraordinar ca am invatat atatea lucruri intr-un timp atat de scurt, iar asta se datoreaza mentorilor si persoanelor din departament si din echipa cu care am colaborat si fara de care nu as fi reusit sa fac aceasta proba. A fost greu, dar s-a meritat si tin sa multumesc tuturor!
